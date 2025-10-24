@@ -5,7 +5,14 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function CharacterCard(item) {
+type CharacterCardProps = {
+  item: {
+    name: string;
+    description: string;
+  }
+}
+
+export default function CharacterCard({ item }: CharacterCardProps) {
   console.log(item)
   return (
     <Card sx={{ maxWidth: 345 }}>

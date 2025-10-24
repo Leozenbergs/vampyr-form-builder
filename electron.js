@@ -1,16 +1,28 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow } = require("electron");
+const path = require("path");
 
-function createWindow () {
-  console.log("Starting Electron App...");
+const isDev = !app.isPackaged;
+
+function createWindow() {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 800,
     webPreferences: {
-      nodeIntegration: true
-    }
-  })
+      nodeIntegration: false,
+      contextIsolation: true,
+    },
+  });
 
-  win.loadURL('http://localhost:3000')
+  if (isDev) {
+    win.loadURL("http://localhost:5173"); // default Vite port
+    win.webContents.openDevTools();
+  } else {
+    win.loadFile(path.join(__dirname, "../dist/index.html"));
+  }
 }
 
-app.whenReady().then(createWindow)
+app.whenReady().then(createWindow);
+
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") app.quit();
+});

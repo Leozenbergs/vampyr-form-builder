@@ -36,7 +36,7 @@ function RollsPage() {
   const [dice, setDice] = useState<number>(0)
   const [tab, setTab] = useState<number>(6)
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTab(newValue);
   };
 
