@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+# Vampyr Form Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is an Electron application built with React, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+## Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `electron/main`: Main Electron process code.
+- `electron/preload`: Preload script for the Electron renderer process.
+- `src`: React application source code.
+- `public`: Static assets.
 
-## React Compiler
+## Development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+To run the application in development mode:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev:electron
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+This will start the Vite development server for the renderer process and launch the Electron app.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Build
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+To build the application for production:
+
+```bash
+npm install
+npm run build
 ```
+
+This will compile the main, preload, and renderer processes and package the Electron application.
+
+## Available Scripts
+
+Here are the main scripts available in `package.json`:
+
+- `dev`: Runs the Vite development server for the renderer process.
+- `build`: Builds the renderer process for production.
+- `lint`: Lints the project files using ESLint.
+- `preview`: Serves the production build locally for previewing.
+- `electron`: Runs the Electron application directly (after a build).
+- `start`: Runs the Electron application in preview mode (after a build).
+- `dev:electron`: Starts the Vite development server for the renderer and launches the Electron app in development mode.
+- `prebuild`: Runs the `electron-vite build` command before the main build.
+
+## Features
+
+### UI/UX
+
+The application utilizes **Material-UI (MUI)** with a **dark theme** for a modern and consistent user experience.
+
+### Routing
+
+The application implements client-side routing using `react-router-dom` to navigate between different pages and views.
+
+### Core Functionality
+
+- **Character Creation**: Users can create new characters with various attributes and details.
+- **Character Editing**: Existing characters can be edited and updated.
+- **Dice Rolling**: The application provides functionality for throwing dice, likely for in-game actions or character stats.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
