@@ -63,4 +63,3 @@ The application implements client-side routing using `react-router-dom` to navig
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
