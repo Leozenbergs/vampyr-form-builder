@@ -1,7 +1,5 @@
-import { Box, Container, Fab, Grid, Stack, Tooltip, Typography } from '@mui/material';
+import { Container, Grid, Paper, styled, Typography, } from '@mui/material';
 import CharacterCard from '../components/cards/CharacterCard';
-import { Add } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
 
 type CharacterCardProps = {
   item: {
@@ -10,9 +8,32 @@ type CharacterCardProps = {
   }
 }
 
+interface CampaignCardProps extends CharacterCardProps {
+  item: {
+    name: string;
+    description: string;
+    characters: CharacterCardProps['item'][];
+  }
+}
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: theme.spacing(2),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+  height: 120,
+}));
+
 function Dashboard() {
-  const navigate = useNavigate()
+  const rollNumber = 42 // Placeholder for future dice roll tracking feature
   const currentChars = localStorage.getItem("characters") ?? "[]"
+  const currentCamps = localStorage.getItem("campaigns") ?? "[]"
+
+  const charNumber = JSON.parse(currentChars).length ?? 0
+  const campNumber = JSON.parse(currentCamps).length ?? 0
 
   return (
     <Container
@@ -21,38 +42,47 @@ function Dashboard() {
         minHeight: "70vh"
       }}
     >
-      <Grid container spacing={2}>
-        <Grid size={8} />
+      <Grid container spacing={2} sx={{ mb: 2 }}>
         <Grid size={4}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row', // or 'column', 'row-reverse', 'column-reverse'
-              justifyContent: 'end', // or 'flex-start', 'flex-end', 'space-between', 'space-around', 'space-evenly'
-              alignItems: 'center', // or 'flex-start', 'flex-end', 'stretch', 'baseline'
-              gap: 2, // Spacing between items
-            }}
-          >
-            <Typography variant="h4">Click to create</Typography>
-            <Tooltip title="Create a new character">
-              <Fab
-                color="primary"
-                aria-label="add"
-                onClick={() => navigate("/create")}
-              >
-                <Add />
-              </Fab>
-            </Tooltip>
-          </Box>
+          <Item>
+            Active characters <Typography variant="h4" sx={{ ml: 2 }}>{charNumber}</Typography>
+          </Item>
+        </Grid>
+        <Grid size={4}>
+          <Item>
+            Active campaigns <Typography variant="h4" sx={{ ml: 2 }}>{campNumber}</Typography>
+          </Item>
+        </Grid>
+        <Grid size={4}>
+          <Item>
+            Dice rolls today <Typography variant="h4" sx={{ ml: 2 }}>{rollNumber}</Typography>
+          </Item>
         </Grid>
       </Grid>
-      <Stack direction="column" spacing={2}>
-        <Stack direction="row" spacing={2}>
-          { JSON.parse(currentChars).map((item: CharacterCardProps['item'], index: number) => 
-            <CharacterCard key={index} item={item} />
-          ) }
-        </Stack>
-      </Stack>
+      { charNumber > 0 && (
+        <>
+          <Typography variant='h3'>Recent characters</Typography>
+          <Grid container spacing={2} sx={{ my: 2 }}>
+            {JSON.parse(currentChars).map((item: CharacterCardProps['item'], index: number) => 
+              <Grid size={3} key={index}>
+                <CharacterCard item={item} />
+              </Grid>
+            )}
+          </Grid>
+        </>
+      )}
+      { campNumber > 0 && (
+        <>
+          <Typography variant='h3'>Recent campaigns</Typography>
+          <Grid container spacing={2} sx={{ my: 2 }}>
+            {JSON.parse(currentCamps).map((item: CampaignCardProps['item'], index: number) => 
+              <Grid size={3} key={index}>
+                <CharacterCard item={item} />
+              </Grid>
+            )}
+          </Grid>
+        </>
+      )}
     </Container>
   );
 }

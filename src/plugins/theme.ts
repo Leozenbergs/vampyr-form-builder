@@ -4,9 +4,9 @@ const theme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#d32f2f", // crimson red (main accent color)
-      light: "#ff6659",
-      dark: "#9a0007",
+      main: "#8b1c1cff", // crimson red (main accent color)
+      light: "#d32f2f",
+      dark: "#520105ff",
       contrastText: "#ffffff",
     },
     secondary: {
@@ -16,7 +16,7 @@ const theme = createTheme({
       contrastText: "#ffffff",
     },
     background: {
-      default: "#0d1117", // main background
+      default: "#4b0004ff", // main background
       paper: "#161b22", // card background
     },
     text: {
@@ -57,8 +57,8 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: "#161b22",
-          borderRadius: "1px",
-          border: "1px solid #d32f2f !important",
+          borderRadius: "8px",
+          border: "1px solid #8b1c1cff !important",
         },
       },
     },

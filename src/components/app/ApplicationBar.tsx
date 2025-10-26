@@ -2,23 +2,18 @@ import * as React from 'react';
 import { styled, useTheme, type Theme, type CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
-import MuiAppBar, { type AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
+import WaterDropIcon from '@mui/icons-material/WaterDrop';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-// import { Casino, Dashboard } from '@mui/icons-material'; // Removed as icons are now dynamic
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { routes } from '../../router/routes';
+import { AppBar, Toolbar } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -46,39 +41,12 @@ const closedMixin = (theme: Theme): CSSObject => ({
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'flex-end',
+  justifyContent: 'center',
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  border: "1px solid #d32f2f !important",
-  variants: [
-    {
-      props: ({ open }) => open,
-      style: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
-      },
-    },
-  ],
-}));
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme }) => ({
@@ -109,49 +77,37 @@ export const ApplicationBar = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate()
   const location = useLocation()
   const theme = useTheme();
-  const [visibility, setVisibility] = React.useState(false);
-  const handleDrawerOpen = () => {
-    setVisibility(true);
-  };
-
-  const handleDrawerClose = () => {
-    setVisibility(false);
-  };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box component="nav" sx={{ display: 'flex' }} >
       <CssBaseline />
-      <AppBar position="fixed" open={visibility}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={[
-              {
-                marginRight: 5,
-              },
-              visibility && { display: 'none' },
-            ]}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="b">
-            {location.pathname.replace("/", "").toUpperCase() || "HOME"}
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" open={visibility}>
+      <Drawer
+        variant="permanent"
+        anchor='left'
+        open
+        sx={{
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, borderRadius: '0px' },
+        }}
+        slotProps={{
+          root: {
+            keepMounted: true, // Better open performance on mobile.
+          },
+        }}
+      >
         <DrawerHeader>
-          <Typography variant="h4" noWrap component="div">
-            Vampyr Requiem
-          </Typography>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
+          <div style={{ marginRight: '8px' }}>
+            <WaterDropIcon style={{ color: theme.palette.primary.main }} />
+          </div>
+          <div style={{ marginRight: '12px' }}>
+            <Typography variant="h4" noWrap component="div" sx={{ fontFamily: "Caudex" }}>
+              Vampyr Requiem
+            </Typography>
+            <Typography variant="h6" noWrap component="div" color='primary' sx={{ fontFamily: "Caudex" }}>
+              Chronicles of Darkness
+            </Typography>
+          </div>
         </DrawerHeader>
-        <Divider style={{ borderTop: `1px solid ${theme.palette.primary.dark}` }} />
+        <Divider style={{ borderTop: `1px solid ${theme.palette.primary.main}` }} />
         <List>
           {routes.map((item, index) => (
             <ListItem key={index} disablePadding sx={{ display: 'block' }} onClick={() => navigate(item.route)}>
@@ -161,13 +117,7 @@ export const ApplicationBar = ({ children }: { children: React.ReactNode }) => {
                     minHeight: 48,
                     px: 2.5,
                   },
-                  visibility
-                    ? {
-                        justifyContent: 'initial',
-                      }
-                    : {
-                        justifyContent: 'center',
-                      },
+                  {justifyContent: 'center'}
                 ]}
               >
                 <ListItemIcon
@@ -176,34 +126,43 @@ export const ApplicationBar = ({ children }: { children: React.ReactNode }) => {
                       minWidth: 0,
                       justifyContent: 'center',
                     },
-                    visibility
-                      ? {
-                          mr: 3,
-                        }
-                      : {
-                          mr: 'auto',
-                        },
+                    {mr: 3}
                   ]}
                 >
                   {item.icon && <item.icon />}
                 </ListItemIcon>
                 <ListItemText
-                  primary={item?.text}
-                  sx={[
-                    visibility
-                      ? {
-                          opacity: 1,
-                        }
-                      : {
-                          opacity: 0,
-                        },
-                  ]}
-                />
+                  sx={
+                    [
+                      {opacity: 1}
+                    ]
+                  }
+                >
+                  <Typography variant="body2" noWrap component="div" sx={{ fontFamily: "Caudex" }}>
+                    {item?.text}
+                  </Typography>
+                </ListItemText>
               </ListItemButton>
             </ListItem>
           ))}
         </List>
       </Drawer>
+      <AppBar
+        position="fixed"
+        sx={{
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          ml: { sm: `${drawerWidth}px` },
+          borderRadius: '0px',
+          borderLeft: "0px !important"
+        }}
+        elevation={0}
+      >
+        <Toolbar>
+          <Typography variant="h5" noWrap component="div" sx={{ fontFamily: "Caudex" }}>
+            <b>{(location.pathname.replace("/", "") || "Dashboard").toLocaleUpperCase()}</b>
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <Box
         component="main"
         sx={{
