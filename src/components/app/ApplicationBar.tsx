@@ -16,8 +16,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Casino, Dashboard } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+// import { Casino, Dashboard } from '@mui/icons-material'; // Removed as icons are now dynamic
+import { useLocation, useNavigate } from 'react-router-dom';
 import { routes } from '../../router/routes';
 
 const drawerWidth = 240;
@@ -64,6 +64,7 @@ const AppBar = styled(MuiAppBar, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
+  border: "1px solid #d32f2f !important",
   variants: [
     {
       props: ({ open }) => open,
@@ -106,6 +107,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export const ApplicationBar = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate()
+  const location = useLocation()
   const theme = useTheme();
   const [visibility, setVisibility] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -135,18 +137,21 @@ export const ApplicationBar = ({ children }: { children: React.ReactNode }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Vampyr Form Builder
+          <Typography variant="h6" noWrap component="b">
+            {location.pathname.replace("/", "").toUpperCase() || "HOME"}
           </Typography>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={visibility}>
         <DrawerHeader>
+          <Typography variant="h4" noWrap component="div">
+            Vampyr Requiem
+          </Typography>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
-        <Divider />
+        <Divider style={{ borderTop: `1px solid ${theme.palette.primary.dark}` }} />
         <List>
           {routes.map((item, index) => (
             <ListItem key={index} disablePadding sx={{ display: 'block' }} onClick={() => navigate(item.route)}>
@@ -180,7 +185,7 @@ export const ApplicationBar = ({ children }: { children: React.ReactNode }) => {
                         },
                   ]}
                 >
-                  {item?.text === 'Home' ? <Dashboard /> : <Casino />}
+                  {item.icon && <item.icon />}
                 </ListItemIcon>
                 <ListItemText
                   primary={item?.text}

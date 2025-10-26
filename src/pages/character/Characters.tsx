@@ -1,5 +1,5 @@
 import { Box, Container, Fab, Grid, Stack, Tooltip, Typography } from '@mui/material';
-import CharacterCard from '../components/cards/CharacterCard';
+import CharacterCard from '../../components/cards/CharacterCard';
 import { Add } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ type CharacterCardProps = {
   }
 }
 
-function HomePage() {
+function Characters() {
   const navigate = useNavigate()
   const currentChars = localStorage.getItem("characters") ?? "[]"
 
@@ -57,4 +57,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Characters;

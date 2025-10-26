@@ -38,7 +38,7 @@ const theme = createTheme({
       main: "#2196f3",
     },
   },
-
+  
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
     fontSize: 14,
@@ -57,8 +57,8 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: "#161b22",
-          borderRadius: "12px",
-          border: "1px solid #2c2f33",
+          borderRadius: "1px",
+          border: "1px solid #d32f2f !important",
         },
       },
     },
