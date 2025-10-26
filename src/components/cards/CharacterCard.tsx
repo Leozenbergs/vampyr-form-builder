@@ -23,10 +23,10 @@ export default function CharacterCard({ item }: CharacterCardProps) {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {item?.name}
+          {item?.name ?? 'Unnamed Character'}
         </Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {item?.description}
+          {item?.description ?? 'No description available.'}
         </Typography>
       </CardContent>
       <CardActions>
