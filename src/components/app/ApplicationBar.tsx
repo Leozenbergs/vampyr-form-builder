@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled, useTheme, type Theme, type CSSObject } from '@mui/material/styles';
+import { styled, type Theme, type CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -14,6 +14,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { routes } from '../../router/routes';
 import { AppBar, Toolbar } from '@mui/material';
+import { DefaultIcon } from '../icons/DefaultIcon';
 
 const drawerWidth = 240;
 
@@ -76,7 +77,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export const ApplicationBar = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate()
   const location = useLocation()
-  const theme = useTheme();
 
   return (
     <Box component="nav" sx={{ display: 'flex' }} >
@@ -95,19 +95,17 @@ export const ApplicationBar = ({ children }: { children: React.ReactNode }) => {
         }}
       >
         <DrawerHeader>
-          <div style={{ marginRight: '8px' }}>
-            <WaterDropIcon style={{ color: theme.palette.primary.main }} />
-          </div>
-          <div style={{ marginRight: '12px' }}>
-            <Typography variant="h4" noWrap component="div" sx={{ fontFamily: "Caudex" }}>
+          <DefaultIcon mini icon={<WaterDropIcon />} />
+          <div style={{ marginLeft: '12px', marginRight: '12px' }}>
+            <Typography variant="h4" noWrap component="div">
               Vampyr Requiem
             </Typography>
-            <Typography variant="h6" noWrap component="div" color='primary' sx={{ fontFamily: "Caudex" }}>
+            <Typography variant="h6" noWrap component="div" color='primary'>
               Chronicles of Darkness
             </Typography>
           </div>
         </DrawerHeader>
-        <Divider style={{ borderTop: `1px solid ${theme.palette.primary.main}` }} />
+        <Divider />
         <List>
           {routes.map((item, index) => (
             <ListItem key={index} disablePadding sx={{ display: 'block' }} onClick={() => navigate(item.route)}>
@@ -138,13 +136,14 @@ export const ApplicationBar = ({ children }: { children: React.ReactNode }) => {
                     ]
                   }
                 >
-                  <Typography variant="body2" noWrap component="div" sx={{ fontFamily: "Caudex" }}>
+                  <Typography variant="body2" noWrap component="div">
                     {item?.text}
                   </Typography>
                 </ListItemText>
               </ListItemButton>
             </ListItem>
           ))}
+        <Divider />
         </List>
       </Drawer>
       <AppBar
@@ -158,7 +157,7 @@ export const ApplicationBar = ({ children }: { children: React.ReactNode }) => {
         elevation={0}
       >
         <Toolbar>
-          <Typography variant="h5" noWrap component="div" sx={{ fontFamily: "Caudex" }}>
+          <Typography variant="h5" noWrap component="div">
             <b>{(location.pathname.replace("/", "") || "Dashboard").toLocaleUpperCase()}</b>
           </Typography>
         </Toolbar>

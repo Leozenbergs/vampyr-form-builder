@@ -13,7 +13,6 @@ type CharacterCardProps = {
 }
 
 export default function CharacterCard({ item }: CharacterCardProps) {
-  console.log(item)
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia

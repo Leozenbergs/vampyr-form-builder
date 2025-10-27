@@ -17,14 +17,14 @@ const theme = createTheme({
     },
     background: {
       default: "#4b0004ff", // main background
-      paper: "#161b22", // card background
+      paper: "rgb(17 24 39);", // card background
     },
     text: {
       primary: "#e6edf3", // bright white-blue text
       secondary: "#9ba1a6", // muted gray text
       disabled: "#6c757d",
     },
-    divider: "#2c2f33", // faint card borders
+    divider: "#8b1c1cff", // faint card borders
     error: {
       main: "#f44336",
     },
@@ -38,7 +38,6 @@ const theme = createTheme({
       main: "#2196f3",
     },
   },
-  
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
     fontSize: 14,
@@ -56,9 +55,11 @@ const theme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          backgroundColor: "#161b22",
+          backgroundColor: "rgb(17 24 39);",
           borderRadius: "8px",
           border: "1px solid #8b1c1cff !important",
+          boxShadow: "0 2px 6px rgba(255, 255, 255, 0.2)",
+          backgroundImage: "none",
         },
       },
     },
@@ -78,17 +79,18 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: "#161b22",
+          backgroundColor: "rgb(17 24 39);",
           borderBottom: "1px solid #2c2f33",
+          boxShadow: "0 2px 6px rgba(255, 255, 255, 0.2)",
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          backgroundColor: "#161b22",
+          backgroundColor: "rgb(17 24 39);",
           border: "1px solid #2c2f33",
-          boxShadow: "0 2px 6px rgba(0,0,0,0.25)",
+          boxShadow: "0 2px 6px rgba(255, 255, 255, 0.2)",
         },
       },
     },

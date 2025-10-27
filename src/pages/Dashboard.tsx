@@ -1,5 +1,10 @@
-import { Container, Grid, Paper, styled, Typography, } from '@mui/material';
+import { Container, Grid, Typography, } from '@mui/material';
 import CharacterCard from '../components/cards/CharacterCard';
+import { InfoCard } from '../components/cards/InfoCard';
+import WaterDropIcon from '@mui/icons-material/WaterDrop';
+import { DefaultIcon } from '../components/icons/DefaultIcon';
+import theme from '../plugins/theme';
+
 
 type CharacterCardProps = {
   item: {
@@ -15,17 +20,6 @@ interface CampaignCardProps extends CharacterCardProps {
     characters: CharacterCardProps['item'][];
   }
 }
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  padding: theme.spacing(2),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-  height: 120,
-}));
 
 function Dashboard() {
   const rollNumber = 42 // Placeholder for future dice roll tracking feature
@@ -44,19 +38,37 @@ function Dashboard() {
     >
       <Grid container spacing={2} sx={{ mb: 2 }}>
         <Grid size={4}>
-          <Item>
-            Active characters <Typography variant="h4" sx={{ ml: 2 }}>{charNumber}</Typography>
-          </Item>
+          <InfoCard
+            title="Active characters"
+            count={charNumber}
+            icon={
+              <DefaultIcon
+                icon={<WaterDropIcon sx={{ color: theme.palette.primary.contrastText }} />}
+              />
+            }            
+          />
         </Grid>
         <Grid size={4}>
-          <Item>
-            Active campaigns <Typography variant="h4" sx={{ ml: 2 }}>{campNumber}</Typography>
-          </Item>
+          <InfoCard
+            title="Active campaigns"
+            count={campNumber}
+            icon={
+              <DefaultIcon
+                icon={<WaterDropIcon sx={{ color: theme.palette.primary.contrastText }} />}
+              />
+            }            
+          />
         </Grid>
         <Grid size={4}>
-          <Item>
-            Dice rolls today <Typography variant="h4" sx={{ ml: 2 }}>{rollNumber}</Typography>
-          </Item>
+          <InfoCard
+            title="Dice rolls today"
+            count={rollNumber}
+            icon={
+              <DefaultIcon
+                icon={<WaterDropIcon sx={{ color: theme.palette.primary.contrastText }} />}
+              />
+            }            
+          />
         </Grid>
       </Grid>
       { charNumber > 0 && (
