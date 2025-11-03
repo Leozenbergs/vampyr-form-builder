@@ -24,13 +24,13 @@ export const InfoCard = ({ count, title, icon }: InfoCardProps) => {
   return (
     <Item>
       <Grid container size={12}>
-        <Grid size={8}>
+        <Grid size={8} sx={{ pl: 2 }}>
           <Grid direction="column">
-            <Typography variant="h4" noWrap>{title}</Typography>
-            <Typography variant="h4">{count}</Typography>
+            <Typography variant="h4" noWrap sx={{ textAlign: 'left', mb: 1 }}>{title}</Typography>
+            <Typography variant="h1" color='#fff' sx={{ textAlign: 'left' }}>{count}</Typography>
           </Grid>
         </Grid>
-        <Grid size={4} sx={{ justifyContent: "center", display: 'flex', alignItems: 'center' }}>
+        <Grid size={4} sx={{ pr: 2, justifyContent: "end", display: 'flex', alignItems: 'start' }}>
           {icon}
         </Grid>
       </Grid>

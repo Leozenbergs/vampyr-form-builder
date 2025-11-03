@@ -7,7 +7,7 @@ const theme = createTheme({
       main: "#8b1c1cff", // crimson red (main accent color)
       light: "#d32f2f",
       dark: "#520105ff",
-      contrastText: "#ffffff",
+      contrastText: "#ffffff"
     },
     secondary: {
       main: "#1e88e5", // subtle blue for highlights or links
@@ -18,6 +18,7 @@ const theme = createTheme({
     background: {
       default: "#4b0004ff", // main background
       paper: "rgb(17 24 39);", // card background
+      // Add any additional background colors here
     },
     text: {
       primary: "#e6edf3", // bright white-blue text
@@ -39,7 +40,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Arial", "Inter", "Roboto", "Helvetica", sans-serif',
     fontSize: 14,
     h1: { fontWeight: 700, fontSize: "2rem" },
     h2: { fontWeight: 600, fontSize: "1.6rem" },
@@ -69,6 +70,8 @@ const theme = createTheme({
           textTransform: "none",
           borderRadius: "8px",
           fontWeight: 600,
+          backgroundColor: "rgb(31,41,55, 0.8)",
+          color: "#e6edf3",
         },
         containedPrimary: {
           backgroundColor: "#d32f2f",

@@ -10,8 +10,8 @@ export const DefaultIcon = ({ icon, color = theme.palette.primary.main, mini = f
   return (
     <div style={{
       backgroundColor: color,
-      width: mini ? 35 : 50,
-      height: mini ? 35 : 50,
+      width: mini ? 35 : 55,
+      height: mini ? 35 : 55,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
