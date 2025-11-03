@@ -1,7 +1,7 @@
 import { Container } from '@mui/material';
 import CharacterSheetForm from '../../views/CreationView';
 
-function CreationPage() {
+function CreateCharacter() {
   return (
     <Container
       sx={{
@@ -14,4 +14,4 @@ function CreationPage() {
   );
 }
 
-export default CreationPage
+export default CreateCharacter

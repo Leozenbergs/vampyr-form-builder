@@ -1,168 +1,81 @@
 import * as React from 'react';
-import { styled, useTheme, type Theme, type CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import MuiDrawer from '@mui/material/Drawer';
-import MuiAppBar, { type AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
+import WaterDropIcon from '@mui/icons-material/WaterDrop';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Casino, Dashboard } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { routes } from '../../router/routes';
+import { DefaultIcon } from '../icons/DefaultIcon';
+import { TopBar } from './TopBar';
+import { DrawerHeader, HeaderWrapper } from './drawer/DrawerHeader';
+import { DRAWER_WIDTH } from './globals';
+import { AppDrawer } from './drawer/AppDrawer';
+import { Button, Stack } from '@mui/material';
+import theme from '../../plugins/theme';
+import { LibraryBooks, PersonAddAlt1 } from '@mui/icons-material';
 
-const drawerWidth = 240;
-
-const openedMixin = (theme: Theme): CSSObject => ({
-  width: drawerWidth,
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: 'hidden',
-});
-
-const closedMixin = (theme: Theme): CSSObject => ({
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
-  },
-});
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'flex-end',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-}));
-
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  variants: [
-    {
-      props: ({ open }) => open,
-      style: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
-      },
-    },
-  ],
-}));
-
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme }) => ({
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-    boxSizing: 'border-box',
-    variants: [
-      {
-        props: ({ open }) => open,
-        style: {
-          ...openedMixin(theme),
-          '& .MuiDrawer-paper': openedMixin(theme),
-        },
-      },
-      {
-        props: ({ open }) => !open,
-        style: {
-          ...closedMixin(theme),
-          '& .MuiDrawer-paper': closedMixin(theme),
-        },
-      },
-    ],
-  }),
-);
 
 export const ApplicationBar = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate()
-  const theme = useTheme();
-  const [visibility, setVisibility] = React.useState(false);
-  const handleDrawerOpen = () => {
-    setVisibility(true);
-  };
-
-  const handleDrawerClose = () => {
-    setVisibility(false);
-  };
+  const location = useLocation()
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box component="nav" sx={{ display: 'flex' }} >
       <CssBaseline />
-      <AppBar position="fixed" open={visibility}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={[
-              {
-                marginRight: 5,
-              },
-              visibility && { display: 'none' },
-            ]}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Vampyr Form Builder
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" open={visibility}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </DrawerHeader>
+      <AppDrawer
+        variant="permanent"
+        anchor='left'
+        open
+        sx={{
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, borderRadius: '0px' },
+        }}
+        slotProps={{
+          root: {
+            keepMounted: true, // Better open performance on mobile.
+          },
+        }}
+      >
+        <HeaderWrapper>
+          <DrawerHeader>
+            <DefaultIcon mini icon={<WaterDropIcon />} />
+            <div style={{ marginLeft: '12px', marginRight: '12px' }}>
+              <Typography variant="h4" noWrap component="div">
+                Vampyr Requiem
+              </Typography>
+              <Typography variant="h6" noWrap component="div" color='primary'>
+                Chronicles of Darkness
+              </Typography>
+            </div>
+          </DrawerHeader>
+        </HeaderWrapper>
         <Divider />
         <List>
           {routes.map((item, index) => (
-            <ListItem key={index} disablePadding sx={{ display: 'block' }} onClick={() => navigate(item.route)}>
+            <ListItem
+              key={index}
+              disablePadding
+              sx={{ display: 'block' }}
+              onClick={() => navigate(item.route)}
+            >
               <ListItemButton
                 sx={[
                   {
                     minHeight: 48,
                     px: 2.5,
                   },
-                  visibility
-                    ? {
-                        justifyContent: 'initial',
-                      }
-                    : {
-                        justifyContent: 'center',
-                      },
+                  {
+                    bgcolor: location.pathname === (item.route === "/" ? "/dashboard": item.route) ? 'rgba(211, 47, 47, 0.08)' : 'inherit',
+                    justifyContent: 'center',
+                    borderRadius: 5,
+                    mx: 2,
+                    mb: 1,
+                  }
                 ]}
               >
                 <ListItemIcon
@@ -171,34 +84,46 @@ export const ApplicationBar = ({ children }: { children: React.ReactNode }) => {
                       minWidth: 0,
                       justifyContent: 'center',
                     },
-                    visibility
-                      ? {
-                          mr: 3,
-                        }
-                      : {
-                          mr: 'auto',
-                        },
+                    {mr: 3}
                   ]}
                 >
-                  {item?.text === 'Home' ? <Dashboard /> : <Casino />}
+                  {item.icon && <item.icon />}
                 </ListItemIcon>
                 <ListItemText
-                  primary={item?.text}
-                  sx={[
-                    visibility
-                      ? {
-                          opacity: 1,
-                        }
-                      : {
-                          opacity: 0,
-                        },
-                  ]}
-                />
+                  sx={
+                    [
+                      {opacity: 1}
+                    ]
+                  }
+                >
+                  <Typography variant="body2" noWrap component="div">
+                    {item?.text}
+                  </Typography>
+                </ListItemText>
               </ListItemButton>
             </ListItem>
           ))}
+          <Typography variant="body2" noWrap component="div" sx={{ ml: 2, my: 2, fontWeight: 600 }}>
+            QUICK ACTIONS
+          </Typography>
+          <Stack direction="column" spacing={2} sx={{ mx: 2, my: 2 }}>
+            <Button variant="contained" sx={{ backgroundColor: theme.palette.primary.main }} >
+              <PersonAddAlt1 sx={{ mr: 1 }} />
+              <Typography variant="body2" noWrap component="div">
+                Create character
+              </Typography>
+            </Button>
+            <Button variant="contained">
+              <LibraryBooks sx={{ mr: 1 }} />
+              <Typography variant="body2" noWrap component="div">
+                Create campaign
+              </Typography>
+            </Button>
+          </Stack>
+          <Divider />
         </List>
-      </Drawer>
+      </AppDrawer>
+      <TopBar />
       <Box
         component="main"
         sx={{

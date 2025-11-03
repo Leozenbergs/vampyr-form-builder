@@ -1,7 +1,8 @@
-import { Box, Container, Fab, Grid, Stack, Tooltip, Typography } from '@mui/material';
-import CharacterCard from '../components/cards/CharacterCard';
+import { Box, Button, Container, Fab, Grid, Stack, Tooltip, Typography } from '@mui/material';
+import CharacterCard from '../../components/cards/CharacterCard';
 import { Add } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import theme from '../../plugins/theme';
 
 type CharacterCardProps = {
   item: {
@@ -10,7 +11,7 @@ type CharacterCardProps = {
   }
 }
 
-function HomePage() {
+function Characters() {
   const navigate = useNavigate()
   const currentChars = localStorage.getItem("characters") ?? "[]"
 
@@ -33,28 +34,27 @@ function HomePage() {
               gap: 2, // Spacing between items
             }}
           >
-            <Typography variant="h4">Click to create</Typography>
-            <Tooltip title="Create a new character">
-              <Fab
-                color="primary"
-                aria-label="add"
-                onClick={() => navigate("/create")}
-              >
-                <Add />
-              </Fab>
-            </Tooltip>
+            <Button
+              variant="contained"
+              sx={{ color: "#fff" }}
+              aria-label="add"
+              onClick={() => navigate("/characters/create")}
+            >
+              <Add />
+              <Typography variant="body2" noWrap component="div" sx={{ ml: 1 }}>Create character</Typography>
+            </Button>
           </Box>
         </Grid>
       </Grid>
-      <Stack direction="column" spacing={2}>
-        <Stack direction="row" spacing={2}>
-          { JSON.parse(currentChars).map((item: CharacterCardProps['item'], index: number) => 
-            <CharacterCard key={index} item={item} />
-          ) }
-        </Stack>
-      </Stack>
+      <Grid container spacing={2} sx={{ my: 2 }}>
+        { JSON.parse(currentChars).map((item: CharacterCardProps['item'], index: number) => 
+          <Grid size={3} key={index}>
+            <CharacterCard item={item} />
+          </Grid>
+        ) }
+      </Grid>
     </Container>
   );
 }
 
-export default HomePage;
+export default Characters;
