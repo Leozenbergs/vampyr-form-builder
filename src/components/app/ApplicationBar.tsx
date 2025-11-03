@@ -16,6 +16,9 @@ import { TopBar } from './TopBar';
 import { DrawerHeader, HeaderWrapper } from './drawer/DrawerHeader';
 import { DRAWER_WIDTH } from './globals';
 import { AppDrawer } from './drawer/AppDrawer';
+import { Button, Stack } from '@mui/material';
+import theme from '../../plugins/theme';
+import { LibraryBooks, PersonAddAlt1 } from '@mui/icons-material';
 
 
 export const ApplicationBar = ({ children }: { children: React.ReactNode }) => {
@@ -100,7 +103,24 @@ export const ApplicationBar = ({ children }: { children: React.ReactNode }) => {
               </ListItemButton>
             </ListItem>
           ))}
-        <Divider />
+          <Typography variant="body2" noWrap component="div" sx={{ ml: 2, my: 2, fontWeight: 600 }}>
+            QUICK ACTIONS
+          </Typography>
+          <Stack direction="column" spacing={2} sx={{ mx: 2, my: 2 }}>
+            <Button variant="contained" sx={{ backgroundColor: theme.palette.primary.main }} >
+              <PersonAddAlt1 sx={{ mr: 1 }} />
+              <Typography variant="body2" noWrap component="div">
+                Create character
+              </Typography>
+            </Button>
+            <Button variant="contained">
+              <LibraryBooks sx={{ mr: 1 }} />
+              <Typography variant="body2" noWrap component="div">
+                Create campaign
+              </Typography>
+            </Button>
+          </Stack>
+          <Divider />
         </List>
       </AppDrawer>
       <TopBar />

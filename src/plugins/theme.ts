@@ -49,7 +49,8 @@ const theme = createTheme({
     h5: { fontWeight: 500, fontSize: "1rem" },
     h6: { fontWeight: 500, fontSize: "0.9rem" },
     body1: { color: "#e6edf3" },
-    body2: { color: "#9ba1a6" },
+    body2: { color: "#ccc" },
+    caption: { color: "#9ba1a6" },
   },
 
   components: {
@@ -59,7 +60,7 @@ const theme = createTheme({
           backgroundColor: "rgb(17 24 39);",
           borderRadius: "8px",
           border: "1px solid #8b1c1cff !important",
-          boxShadow: "0 2px 6px rgba(255, 255, 255, 0.2)",
+          boxShadow: "0 2px 6px rgba(224, 11, 11, 0.48)",
           backgroundImage: "none",
         },
       },
@@ -70,11 +71,11 @@ const theme = createTheme({
           textTransform: "none",
           borderRadius: "8px",
           fontWeight: 600,
-          backgroundColor: "rgb(31,41,55, 0.8)",
-          color: "#e6edf3",
+          backgroundColor: "rgba(31,41,55, 0.8)",
+          color: "#fff",
         },
         containedPrimary: {
-          backgroundColor: "#d32f2f",
+          //backgroundColor: "#d32f2f",
           "&:hover": { backgroundColor: "#b71c1c" },
         },
       },
@@ -84,7 +85,7 @@ const theme = createTheme({
         root: {
           backgroundColor: "rgb(17 24 39);",
           borderBottom: "1px solid #2c2f33",
-          boxShadow: "0 2px 6px rgba(255, 255, 255, 0.2)",
+          boxShadow: "0 2px 6px rgba(224, 11, 11, 0.48)",
         },
       },
     },
@@ -93,7 +94,7 @@ const theme = createTheme({
         root: {
           backgroundColor: "rgb(17 24 39);",
           border: "1px solid #2c2f33",
-          boxShadow: "0 2px 6px rgba(255, 255, 255, 0.2)",
+          boxShadow: "0 2px 6px rgba(224, 11, 11, 0.48)",
         },
       },
     },

@@ -27,7 +27,7 @@ export const TopBar = () => {
           <Typography variant="h2" noWrap component="div">
             <b>{(location.pathname.replace("/", "") || "Dashboard").toLocaleUpperCase()}</b>
           </Typography>
-          <Typography variant="body2" noWrap component="div">
+          <Typography variant="caption" noWrap component="div">
             Welcome back to the World of Darkness
           </Typography>
         </div>

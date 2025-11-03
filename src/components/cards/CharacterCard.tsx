@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Avatar, Paper, Stack, styled } from '@mui/material';
 import { useMemo } from 'react';
+import { Edit, Visibility } from '@mui/icons-material';
 
 type CharacterCardProps = {
   item: {
@@ -60,8 +61,12 @@ export default function CharacterCard({ item }: CharacterCardProps) {
         </Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: 'space-between', px: 2, pb: 2 }}>
-        <Button size="small" sx={{ p: 1, width: "50%" }} >View</Button>
-        <Button size="small" sx={{ p: 1, backgroundColor: 'primary.main', width: "50%" }}>Edit</Button>
+        <Button size="small" sx={{ p: 1, width: "50%" }} >
+          <Visibility sx={{ mr: 1 }} /> View
+        </Button>
+        <Button size="small" sx={{ p: 1, backgroundColor: 'primary.main', width: "50%" }}>
+          <Edit sx={{ mr: 1 }} /> Edit
+        </Button>
       </CardActions>
     </Card>
   );

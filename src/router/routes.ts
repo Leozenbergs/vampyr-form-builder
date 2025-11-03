@@ -5,6 +5,5 @@ export const routes = [
   {text: 'Characters', route: "/characters", icon: Group},
   {text: 'Campaigns', route: "/campaigns", icon: LibraryBooks},
   {text: 'Dice Rolls', route: "/rolls", icon: Casino},
-  {text: 'Create character', route: "/characters/create", icon: PersonAddAlt1},
   {text: 'Documentation', route: "/documentation", icon: LibraryBooks},
 ]
