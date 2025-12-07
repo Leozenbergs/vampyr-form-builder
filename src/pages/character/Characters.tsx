@@ -1,8 +1,7 @@
-import { Box, Button, Container, Fab, Grid, Stack, Tooltip, Typography } from '@mui/material';
+import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import CharacterCard from '../../components/cards/CharacterCard';
 import { Add } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import theme from '../../plugins/theme';
 
 type CharacterCardProps = {
   item: {
@@ -47,11 +46,11 @@ function Characters() {
         </Grid>
       </Grid>
       <Grid container spacing={2} sx={{ my: 2 }}>
-        { JSON.parse(currentChars).map((item: CharacterCardProps['item'], index: number) => 
+        {JSON.parse(currentChars).map((item: CharacterCardProps['item'], index: number) =>
           <Grid size={3} key={index}>
             <CharacterCard item={item} />
           </Grid>
-        ) }
+        )}
       </Grid>
     </Container>
   );

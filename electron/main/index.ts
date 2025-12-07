@@ -1,7 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import { join } from 'path';
 
-const VITE_DEV_SERVER_URL = "http://localhost:5173/" // process.env['VITE_DEV_SERVER_URL'];
+const VITE_DEV_SERVER_URL = process.env.VITE_DEV_SERVER_URL
 
 function createWindow() {
   console.log('createWindow called');
@@ -18,7 +18,7 @@ function createWindow() {
   });
 
   mainWindow.webContents.openDevTools(); // Open DevTools automatically
-  
+
   if (VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(VITE_DEV_SERVER_URL).catch(err => console.error('Failed to load URL:', err));
   } else {
